@@ -14,6 +14,7 @@
     }
 
 #2.启动时的脚本准备。
+
    >导入 resouses/mysql-schemal-*.sql 到数据库。
 #3.初始化数据。（第一次的时候要使用，以后可以注释掉 withUser以后的）
 
@@ -38,5 +39,7 @@
 
 #5.使用postman测试。
 
-#6.注意：Basic Authorization:是使用base64编码用户名和密码（base64.encod(username:password)）
-        所以在服务端获取token的时候，服务端使用 client id 和client secret使用Basic Authorization去获取token.
+#6.注意：
+
+    Basic Authorization:是使用base64编码用户名和密码（base64.encod(username:password)）   
+    所以在服务端获取token的时候，服务端使用 client id 和client secret使用Basic Authorization去获取token.
