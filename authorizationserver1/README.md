@@ -16,6 +16,7 @@
 #2.启动时的脚本准备。
 
    >导入 resouses/mysql-schemal-*.sql 到数据库。
+   
 #3.初始化数据。（第一次的时候要使用，以后可以注释掉 withUser以后的）
 
     spring security
