@@ -13,6 +13,7 @@
         <module>resourceserver1</module>
         <module>oauth2-client</module>
         <module>oauth2-sso</module>
+        <module>resourceserver2</module>
     </modules>
 
 
