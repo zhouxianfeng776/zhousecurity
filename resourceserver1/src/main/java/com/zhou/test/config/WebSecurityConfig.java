@@ -28,11 +28,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.antMatcher("/test2")
+        /*http.antMatcher("/test2")
                 .authorizeRequests()
                 .mvcMatchers("/messages").hasAuthority("SCOPE_message:read")
                 .anyRequest().authenticated()
-        .and().httpBasic();
+        .and().httpBasic();*/
     }
 
 }

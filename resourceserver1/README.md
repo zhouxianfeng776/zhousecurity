@@ -4,9 +4,9 @@
 >>>    DefaultTokenService(InMemoryTokenStore,jdbcTokenStore)
     
     
-#1.遇到的问题
+# 1.遇到的问题
 
-##1.1配置权限不生效
+## 1.1配置权限不生效
     
     .mvcMatchers("/messages/**").hasAuthority("SCOPE_message:read")
     因为工程里配置了多个httpSecurity,每一个httpSecurity相当于一个过滤器链
@@ -35,4 +35,23 @@
     		}
     就会跳过 ResourceServerSecurityConfigurer 的初始化阶段。
     
+## 1.3
+    
+    权限拦截失败
+    .mvcMatchers("/messages").hasAuthority("SCOPE_message:read")
+    上面写法是官方文档里（有错误）
+     https://docs.spring.io/spring-security/site/docs/5.1.5.RELEASE/reference/htmlsingle/#oauth2resourceserver-sansboot
+    正确写法（spring-security-oauth 测试工程里）：
+    .antMatchers("/me").access("#oauth2.hasScope('read')")					
+    .antMatchers("/photos").access("#oauth2.hasScope('read') or (!#oauth2.isOAuth() and hasRole('ROLE_USER'))")                                        
+    .antMatchers("/photos/trusted/**").access("#oauth2.hasScope('trust')")
+    .antMatchers("/photos/user/**").access("#oauth2.hasScope('trust')")					
+    .antMatchers("/photos/**").access("#oauth2.hasScope('read') or (!#oauth2.isOAuth() and hasRole('ROLE_USER'))")
+    //是在oauth2server中使用
+    .regexMatchers(HttpMethod.DELETE, "/oauth/users/([^/].*?)/tokens/.*")
+        .access("#oauth2.clientHasRole('ROLE_CLIENT') and (hasRole('ROLE_USER') or #oauth2.isClient()) and #oauth2.hasScope('write')")
+    .regexMatchers(HttpMethod.GET, "/oauth/clients/([^/].*?)/users/.*")
+        .access("#oauth2.clientHasRole('ROLE_CLIENT') and (hasRole('ROLE_USER') or #oauth2.isClient()) and #oauth2.hasScope('read')")
+    .regexMatchers(HttpMethod.GET, "/oauth/clients/.*")
+        .access("#oauth2.clientHasRole('ROLE_CLIENT') and #oauth2.isClient() and #oauth2.hasScope('read')");
     
