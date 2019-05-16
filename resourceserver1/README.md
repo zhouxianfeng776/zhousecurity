@@ -1,10 +1,11 @@
-OAuth2AuthenticationProcessingFilter
-    负责去校验token
-    remoteTokenService
-    DefaultTkoenService(InMemoryTokenStore,jdbcTokenStore)
+>OAuth2AuthenticationProcessingFilter
+> >   负责去校验token
+>>>    remoteTokenService
+>>>    DefaultTokenService(InMemoryTokenStore,jdbcTokenStore)
     
     
 #1.遇到的问题
+
 ##1.1配置权限不生效
     
     .mvcMatchers("/messages/**").hasAuthority("SCOPE_message:read")
