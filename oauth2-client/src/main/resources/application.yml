@@ -1,0 +1,21 @@
+server:
+  port: 8086
+  servlet:
+    session:
+      cookie:
+        name: UISESSIONMEMBER
+
+security:
+  oauth2:
+    client:
+      client-id: tonr
+      client-secret: secret
+      access-token-uri: http://localhost:8080/oauth/token
+      user-authorization-uri: http://localhost:8080/oauth/authorize
+
+logging:
+  level:
+    root: debug
+
+
+
