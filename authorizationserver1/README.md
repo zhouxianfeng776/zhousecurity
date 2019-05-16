@@ -40,6 +40,8 @@
 
 #5.使用postman测试。
 
+    根据 http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html
+    
 #6.注意：
 
     Basic Authorization:是使用base64编码用户名和密码（base64.encod(username:password)）   
