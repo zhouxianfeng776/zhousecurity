@@ -14,6 +14,8 @@
         <module>oauth2-client</module>
         <module>oauth2-sso</module>
         <module>resourceserver2</module>
+        <module>authorizationserver3</module>
+        <module>resourceserver3</module>
     </modules>
 
 
