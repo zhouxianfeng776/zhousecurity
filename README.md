@@ -13,11 +13,13 @@
     
     
     security.oauth2.resource.jwt.key-uri.
-    $ curl https://uaa.run.pivotal.io/token_key
+>    $ curl https://uaa.run.pivotal.io/token_key （返回的是一个公钥 token_key)
+    
     {"alg":"SHA256withRSA","value":"-----BEGIN PUBLIC KEY-----\nMIIBI...\n-----END PUBLIC KEY-----\n"}
     Additionally, if your authorization server has an endpoint that returns a set of JSON Web Keys(JWKs), you can configure security.oauth2.resource.jwk.key-set-uri. E.g. on PWS:
     
-    security.oauth2.resource.jwk.key-set-uri
+>    security.oauth2.resource.jwk.key-set-uri(返回的是公钥列表 token_keys)
+    
     $ curl https://uaa.run.pivotal.io/token_keys
     {"keys":[{"kid":"key-1","alg":"RS256","value":"-----BEGIN PUBLIC KEY-----\nMIIBI...\n-----END PUBLIC KEY-----\n"]}
     
