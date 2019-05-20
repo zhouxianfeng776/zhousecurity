@@ -16,6 +16,8 @@
         <module>resourceserver2</module>
         <module>authorizationserver3</module>
         <module>resourceserver3</module>
+        <module>spring-Kerberos</module>
+        <module>spring-openid</module>
     </modules>
 
 

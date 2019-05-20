@@ -9,6 +9,15 @@
     authorizationserver3 使用jwt
     resourcesserver3 获取公钥，验证签名正确性，获取jwt中的用户信息
 
+## 1.4
+    
+    spring-kerberos 介绍认证原理，参照spring里的实现
+    工作中暂时没用到，不做详细测试
+    
+## 1.5  
+
+    spring-openid 开放的id（无测试实现。）
+
 ## jwt（Java web token）和jwk(java web key 通过web获取公钥)
     
     
@@ -43,7 +52,17 @@
             jwt:
               jwk-set-uri: https://idp.example.com/.well-known/jwks.json
     
+# 2参考文档
+-----
+    spring security oauth
+    https://projects.spring.io/spring-security-oauth/docs/oauth2.html   
     
+    spring security 
+    https://docs.spring.io/spring-security/site/docs/5.1.5.RELEASE/reference/htmlsingle/#oauth2resourceserver
+    
+    spring  oauth boot
+    https://docs.spring.io/spring-security-oauth2-boot/docs/2.0.0.RELEASE/reference/htmlsingle/#boot-features-security-oauth2-resource-server
+     
     
     
     
