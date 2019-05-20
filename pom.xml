@@ -18,6 +18,7 @@
         <module>resourceserver3</module>
         <module>spring-Kerberos</module>
         <module>spring-openid</module>
+        <module>test-verificationCode</module>
     </modules>
 
 
