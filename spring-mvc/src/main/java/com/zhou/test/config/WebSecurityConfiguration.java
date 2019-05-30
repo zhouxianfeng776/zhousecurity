@@ -30,8 +30,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/","/csrf","/swagger-ui.html","/webjars/springfox-swagger-ui/**","/swagger-resources/**","/v2/api-docs").permitAll()
                 .anyRequest().authenticated().and()
-//                .httpBasic().and()
-//                .formLogin().and()
+                .httpBasic().and()
+                .formLogin().and()
         ;
     }
 
