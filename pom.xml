@@ -19,6 +19,7 @@
         <module>spring-Kerberos</module>
         <module>spring-openid</module>
         <module>test-verificationCode</module>
+        <module>spring-mvc</module>
     </modules>
 
 
