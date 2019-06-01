@@ -28,7 +28,7 @@
 		<plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"/>
 		<plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
 		<!--
-		<plugin type="org.mybatis.generator.plugins.MapperAnnotationPlugin" />
+		<plugin type="org.mybatis.comment.plugins.MapperAnnotationPlugin" />
 		-->
 		<connectionFactory>
 			<property name="driverClass" value="${db.driverClassName}"/>
@@ -166,9 +166,9 @@
 
 	<!--
 	<context id="DynamicFlatJava5" defaultModelType="flat" targetRuntime="MyBatis3DynamicSQL">
-		<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
-		<plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"/>
-		<plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+		<plugin type="org.mybatis.comment.plugins.EqualsHashCodePlugin"/>
+		<plugin type="org.mybatis.comment.plugins.RowBoundsPlugin"/>
+		<plugin type="org.mybatis.comment.plugins.ToStringPlugin"/>
 		<connectionFactory>
 			<property name="driverClass" value="${db.driverClassName}"/>
 			<property name="connectionURL" value="${db.url}"/>

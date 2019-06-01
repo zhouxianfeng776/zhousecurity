@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+       Copyright 2006-2018 the original author or authors.
+
+       Licensed under the Apache License, Version 2.0 (the "License");
+       you may not use this file except in compliance with the License.
+       You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+       Unless required by applicable law or agreed to in writing, software
+       distributed under the License is distributed on an "AS IS" BASIS,
+       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+       See the License for the specific language governing permissions and
+       limitations under the License.
+
+-->
+<!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <properties resource="database.properties"/>
+
+    <context id="FlatJava5" defaultModelType="flat" targetRuntime="MyBatis3">
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
+        <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"/>
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+
+        <plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
+            <property name="searchString" value="Example$"/>
+            <!-- 替换后
+            <property name="replaceString" value="Criteria" />
+             -->
+            <property name="replaceString" value="Query"/>
+        </plugin>
+        <!-- 此处是将UserMapper.xml改名为UserDao.xml 当然 想改成什么都行~ -->
+        <plugin type="com.zhou.test.plugin.RenameSqlMapperPlugin">
+            <property name="searchString" value="Mapper"/>
+            <property name="replaceString" value="Dao"/>
+        </plugin>
+
+        <!-- 此处是将UserMapper改名为UserDao 接口 当然 想改成什么都行~  -->
+        <plugin type="com.zhou.test.plugin.RenameJavaMapperPlugin">
+            <property name="searchString" value="Mapper$"/>
+            <property name="replaceString" value="Dao"/>
+        </plugin>
+
+        <commentGenerator type="com.zhou.test.plugin.comment.MyCommentGenerator">
+            <!--是否抑制所有的注释，默认为false-->
+            <property name="suppressAllComments" value="true"/>
+            <!--是否抑制注释中的时间，默认为false，这里改为true，不生成时间（如果生成时间，则每次都是新版本，每次都要提交）-->
+            <property name="suppressDate" value="false"/>
+        </commentGenerator>
+
+
+        <connectionFactory>
+            <property name="driverClass" value="${db.driverClassName}"/>
+            <property name="connectionURL" value="${db.url}"/>
+            <property name="userId" value="${db.username}"/>
+            <property name="password" value="${db.password}"/>
+        </connectionFactory>
+
+        <javaModelGenerator targetPackage="com.zhou.test.pojo" targetProject="./src/test/java">
+            <property name="enableSubPackages" value="false"/>
+            <property name="trimStrings" value="true"/>
+            <property name="immutable" value="false"/>
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="mappers" targetProject="./src/test/resources">
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.zhou.test.mapper"
+                             targetProject="./src/test/java">
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+        <table tableName="oauth_code">
+        </table>
+    </context>
+
+
+
+</generatorConfiguration>
