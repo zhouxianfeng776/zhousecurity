@@ -17,6 +17,12 @@
 ## 1.5  
 
     spring-openid 开放的id（无测试实现。）
+    
+## 1.6  
+
+    mybatisGeneratorPlugins（插件）
+    帮助你重命名生成的文件后缀和生成po时带上注释。  
+    
 
 ## jwt（Java web token）和jwk(java web key 通过web获取公钥)
     
