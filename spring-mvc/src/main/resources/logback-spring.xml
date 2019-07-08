@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- scan="true"    当此属性设置为true时，配置文件如果发生改变，将会被重新加载，默认值为true。 -->
+<!--  scanPeriod="30 seconds"   设置每30秒自动扫描,若没有指定具体单位则以milliseconds为标准(单位:milliseconds, seconds, minutes or hours)  -->
+<!-- debug="false"当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。-->
+<configuration  scan="true" scanPeriod="30 seconds">
+    <conversionRule conversionWord="ip" converterClass="com.zhou.test.log.IpConvert" />
+    <!-- 上下文名称  -->
+    <contextName>wmslog</contextName>
+    <!--<springProperty scope="context" name="LOG_PATH" source="logging.path"/>
+    <springProperty scope="context" name="LOG_FILE" source="logging.file"/>-->
+
+    <!-- ch.qos.logback.core.ConsoleAppender 控制台输出 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder charset="UTF-8">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss}| %-5level|%ip|%thread|%X{REQUEST_ID}| %logger{50}| %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 自定义日志输出到文件 -->
+    <appender name="CUSTOM_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+        <!-- 级别过滤器 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <!-- 设置过滤级别 -->
+            <level>DEBUG</level>
+        </filter>
+
+        <file>${LOG_PATH}/logs/${LOG_FILE}.log</file>
+        <!-- 根据时间来制定滚动策略 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>
+                ${LOG_PATH}/logs/backup/${LOG_FILE}.%d{yyyy-MM-dd}.%i.log
+            </fileNamePattern>
+            <!-- 多久后自动清楚旧的日志文件,单位:日 -->
+            <maxHistory>30</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- 默认值是 10MB,文档最大值 -->
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+
+        <encoder>
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss}| %-5level|%ip|%thread|%X{REQUEST_ID}| %logger{50}| %msg%n</Pattern>
+        </encoder>
+    </appender>
+
+    <!-- 安全审计日志输入到文件 -->
+    <appender name="AUDIT_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 级别过滤器 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <!-- 设置过滤级别 -->
+            <level>INFO</level>
+            <!-- 用于配置符合过滤条件的操作 -->
+            <onMatch>ACCEPT</onMatch>
+            <!-- 用于配置不符合过滤条件的操作 -->
+            <onMismatch>DENY</onMismatch>
+        </filter>
+
+        <file>${LOG_PATH}/auditlog/audit.log</file>
+        <!-- 根据时间来制定滚动策略 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>
+                ${LOG_PATH}/auditlog/audit_%d{yyyy-MM-dd}.%i.log
+            </fileNamePattern>
+            <!-- 多久后自动清楚旧的日志文件,单位:日 -->
+            <maxHistory>30</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- 默认值是 10MB,文档最大值 -->
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+
+        <encoder>
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss}| %-5level|%ip|%thread| %logger{50}| %msg%n</Pattern>
+        </encoder>
+    </appender>
+
+    <!-- 控制java下面包的打印,没设置等级,将继承上级root的等级 -->
+    <logger name="com.test"/>
+
+    <!--安全审计日志-->
+    <logger name="com.sf.wms.common.log" additivity="false" level="INFO">
+        <appender-ref ref="AUDIT_FILE" />
+    </logger>
+
+    <!--开发环境:打印控制台-->
+    <springProfile name="dev">
+        <logger name="com.sf.wms" level="debug" additivity="true"/>
+        <!-- 打印请求路径 -->
+        <logger name="org.springframework.web.servlet.DispatcherServlet" level="TRACE" additivity="true"/>
+        <!-- 打印请求参数 -->
+        <logger name="org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod" level="TRACE" additivity="true"/>
+        <!-- 打印requestbody参数
+        <logger name="org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor" level="TRACE" additivity="true"/>
+    -->
+    </springProfile>
+
+    <!--测试环境:打印到日志-->
+    <springProfile name="test">
+        <logger name="com.sf.wms" level="debug" additivity="true"/>
+        <!-- 打印请求路径 -->
+        <logger name="org.springframework.web.servlet.DispatcherServlet" level="TRACE" additivity="true"/>
+        <!-- 打印请求参数 -->
+        <logger name="org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod" level="TRACE" additivity="true"/>
+        <!-- 打印requestbody参数
+        <logger name="org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor" level="TRACE" additivity="true"/>
+    -->
+    </springProfile>
+
+    <!--预生产环境:打印到日志-->
+    <springProfile name="uat">
+        <logger name="com.sf.wms" level="info" additivity="true"/>
+        <!-- 打印请求路径 -->
+        <logger name="org.springframework.web.servlet.DispatcherServlet" level="TRACE" additivity="true"/>
+        <!-- 打印请求参数 -->
+        <logger name="org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod" level="TRACE" additivity="true"/>
+        <!-- 打印requestbody参数
+        <logger name="org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor" level="TRACE" additivity="true"/>
+    -->
+    </springProfile>
+
+    <!--生成环境:打印到日志-->
+    <springProfile name="prod">
+        <logger name="com.sf.wms" level="info" additivity="true"/>
+        <!-- 打印请求路径 -->
+        <logger name="org.springframework.web.servlet.DispatcherServlet" level="TRACE" additivity="true"/>
+        <!-- 打印请求参数 -->
+        <logger name="org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod" level="TRACE" additivity="true"/>
+        <!-- 打印requestbody参数
+        <logger name="org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor" level="TRACE" additivity="true"/>
+    -->
+    </springProfile>
+
+    <root level="info">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="CUSTOM_FILE"/>
+    </root>
+</configuration>

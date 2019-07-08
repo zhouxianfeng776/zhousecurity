@@ -9,7 +9,6 @@
     <artifactId>mybatisGeneratorPlugins</artifactId>
     <version>1.0</version>
     <name>mybatisGeneratorPlugins</name>
-    <!-- FIXME change it to the project's website -->
     <packaging>jar</packaging>
 
     <properties>

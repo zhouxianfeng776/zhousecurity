@@ -1,16 +1,7 @@
-debug: true
 
-server:
-  port: 8070
-  servlet:
-    session:
-      timeout: 10s
-      cookie:
-        name: UISESSIONMEMBER
 spring:
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://10.202.200.65:3306/spring_security?allowMultiQueries=true&useUnicode=true&tinyInt1isBit=false&characterEncoding=UTF-8&useSSL=true&serverTimezone=Hongkong
-    username: nutsauth
-    password: 1qaz@WSX3edc
+  profiles:
+    active: dev
+
+mybatis.config-location: classpath:mybatis-config.xml
+mybatis.mapper-locations: classpath:mappers/*.xml

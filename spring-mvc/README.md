@@ -23,3 +23,10 @@
     另一个已加载完成，使用的是具体的validator ，
     ValidationAutoConfiguration 使用的是自动配置。
     
+>>> 两种用法不能一起使用，否则参数会校验两次。并且使用BindingResult 仍然会抛出异常。 
+    MethodValidationInterceptor
+    
+    {ErrorsMethodArgumentResolver@10441}
+    RequestResponseBodyMethodProcessor
+    
+    

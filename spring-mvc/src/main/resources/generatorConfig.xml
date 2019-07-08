@@ -54,8 +54,13 @@
 		</javaClientGenerator>
 
 
-		<table tableName="putaway_sku_detail">
+		<table tableName="menu">
 		</table>
+		<table tableName="resource_path">
+		</table>
+		<table tableName="menu_of_resource">
+		</table>
+
 
 
 		<!--MyBatis3DynamicSQL

@@ -15,8 +15,8 @@ import org.springframework.security.core.userdetails.User;
  * @description: TODO
  * @date 2019/5/2715:55
  */
-@Configuration
-@EnableWebSecurity
+//@Configuration
+//@EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     /**

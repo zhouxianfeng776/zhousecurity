@@ -4,6 +4,7 @@ import com.fasterxml.classmate.TypeResolver;
 import com.google.common.base.Predicate;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +39,7 @@ import java.util.List;
  */
 @EnableSwagger2
 @Configuration
+@ConditionalOnExpression("${swagger.enable: true}")
 public class Swagger2Configuration {
 
     @Autowired
