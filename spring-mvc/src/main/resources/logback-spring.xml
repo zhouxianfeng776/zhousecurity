@@ -133,7 +133,7 @@
     -->
     </springProfile>
 
-    <root level="debug">
+    <root level="info">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="CUSTOM_FILE"/>
     </root>
